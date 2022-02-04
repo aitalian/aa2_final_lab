@@ -1,3 +1,4 @@
 ---
 # Common vars file for all plays
 guid: "{{ lookup('ENV', 'GUID') }}"
+deployment_name: Mitzicom-dev

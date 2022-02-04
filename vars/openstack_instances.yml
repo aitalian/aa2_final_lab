@@ -5,22 +5,18 @@ openstack_instances:
   - name: app1
     metadata:
       AnsibleGroup: app_servers
-      deployment_name: dev
 
   # app2 (Flask)
   - name: app2
     metadata:
       AnsibleGroup: app_servers
-      deployment_name: dev
 
   # appdb1 (PostgreSQL)
   - name: appdb1
     metadata:
       AnsibleGroup: database_servers
-      deployment_name: dev
 
   # frontend1 (HAProxy)
   - name: frontend1
     metadata:
       AnsibleGroup: load_balancers
-      deployment_name: dev

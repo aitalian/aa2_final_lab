@@ -12,7 +12,7 @@
     wait: no
     nics:
       - net-name: "{{ __instance.net_name | default(default_net_name) }}"
-    meta: "AnsibleGroup={{ __instance.metadata.AnsibleGroup | default(default_metadata_AnsibleGroup) }},deployment_name={{ __instance.metadata.deployment_name | default(default_metadata_deployment_name) }}"
+    meta: "AnsibleGroup={{ __instance.metadata.AnsibleGroup | default(default_metadata_AnsibleGroup) }},deployment_name={{ __instance.metadata.deployment_name | default(deployment_name) | default(default_metadata_deployment_name) }}"
     userdata: |
       #!/bin/bash
     state: "{{ instance_state | default(__instance.state) | default(default_instance_state) | default('present') }}"
