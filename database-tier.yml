@@ -6,4 +6,4 @@
   tags:
     - database_servers
   roles:
-    - install_postgresql
+    - postgresql_install
