@@ -1,0 +1,3 @@
+---
+# Common vars file for all plays
+guid: "{{ lookup('ENV', 'GUID') }}"
