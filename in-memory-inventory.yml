@@ -1,14 +1,10 @@
 ---
-# Playbook to configure provisioned openstack instances
 - name: "In-Memory Inventory"
   hosts: localhost
   connection: local
   gather_facts: false
   vars_files:
     - vars/common.yml
-  vars:
-    home: "{{ lookup('ENV','HOME') }}"
-    internal_domain: "{{ guid }}.internal"
   tasks:
     - name: "Collect OpenStack instance info"
       os_server_info:
