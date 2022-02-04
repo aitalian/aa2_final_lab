@@ -42,7 +42,6 @@
 
 - name: Configure Postgres resources, user, database etc
   block:
-
     - name: Setup Postgres database(s)
       postgresql_db:
         name: "{{ __database.name }}"
@@ -64,6 +63,4 @@
       loop_control:
         loop_var: __user
       no_log: "{{ postgres_user_no_log_state | default(false) }}"
-
-
   become_user: "{{ postgres_user }}"
