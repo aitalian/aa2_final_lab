@@ -1,12 +1,12 @@
 [load_balancers]
-frontend1  ansible_ssh_host=frontend1."{{ guid }}".internal
+frontend1  ansible_ssh_host=frontend1.{{ guid }}.internal
 
 [app_servers]
-app1  ansible_ssh_host=app1."{{ guid }}".internal
-app2  ansible_ssh_host=app2."{{ guid }}".internal
+app1  ansible_ssh_host=app1.{{ guid }}.internal
+app2  ansible_ssh_host=app2.{{ guid }}.internal
 
 [database_servers]
-appdb1 ansible_ssh_host=appdb1."{{ guid }}".internal
+appdb1 ansible_ssh_host=appdb1.{{ guid }}.internal
 
 [internal:children]
 load_balancers
@@ -14,4 +14,4 @@ app_servers
 database_servers
 
 [all:vars]
-guid="{{ lookup('env', 'GUID') }}"
+guid={{ lookup('env', 'GUID') }}
