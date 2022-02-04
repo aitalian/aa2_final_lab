@@ -1,0 +1,5 @@
+---
+# Provision OpenStack instances and configure them
+- import_playbook: provision-instances.yml
+- import_playbook: in-memory-inventory.yml
+- import_playbook: configure-instances.yml

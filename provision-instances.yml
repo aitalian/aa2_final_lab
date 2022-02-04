@@ -1,6 +1,6 @@
 ---
 # Playbook to provision openstack instances
-- name: Create OpenStack instances
+- name: "Create OpenStack instances"
   hosts: localhost
   gather_facts: false
   connection: local
@@ -11,10 +11,6 @@
   vars:
     instance_state: present
   tasks:
-    - name: Create OpenStack instances
+    - name: "Create OpenStack instances"
       include_role:
         name: openstack_instances
-
-    - name: Configure DNS and Satellite
-      include_role:
-        name: configure_satellite

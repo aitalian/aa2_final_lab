@@ -1,14 +1,12 @@
 ---
-# Playbook to provision openstack instances
-- name: Configure OpenStack instances
-  hosts: localhost
+# Playbook to configure provisioned openstack instances
+- name: "Configure OpenStack instances using In-Memory Inventory"
+  hosts: app_servers:database_servers:load_balancers
+  become: yes
   gather_facts: false
-  connection: local
-  become: false
   vars_files:
     - vars/common.yml
-    - vars/openstack_instances.yml
   tasks:
-    - name: Configure DNS and Satellite
+    - name: "Configure DNS and Satellite"
       include_role:
         name: configure_satellite
