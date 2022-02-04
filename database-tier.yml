@@ -1,9 +1,24 @@
 ---
+# FIXME: Remove this when it's time to go to Tower
+- import_playbook: in-memory-inventory.yml
+
 - name: "Deploy, configure, and populate PostgreSQL 12"
   hosts: database_servers
   become: true
   gather_facts: false
   tags:
     - database_servers
+  vars:
+    postgres_users:
+      - name: flask
+        password: redhat
+        database: flask_db
+        state: present
+        priv: ALL
+    postgres_databases:
+      - name: flask_db
+        owner: flask
+      - name: books_store
+        owner: flask
   roles:
     - postgresql_install
