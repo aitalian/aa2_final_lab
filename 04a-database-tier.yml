@@ -5,14 +5,17 @@
   hosts: database_servers
   become: true
   gather_facts: false
+  vars_files:
+    - vars/common.yml
   tags:
     - database_servers
   vars:
+    instance_state: present
     postgres_users:
       - name: flask
         password: redhat
         database: flask_db
-        state: present
+        state: "{{ instance_state }}"
         priv: ALL
     postgres_databases:
       - name: flask_db
@@ -20,10 +23,12 @@
       - name: books_store
         owner: flask
   roles:
-    - postgresql_install
+    - role: postgresql_install
+      vars:
+        postgres_install_state: "{{ instance_state }}"
     - role: firewall
       vars:
         firewall_services:
           - postgresql
         firewall_tcp_ports:
-          - 5432
+          - "{{ postgres_port | default('5432') }}"

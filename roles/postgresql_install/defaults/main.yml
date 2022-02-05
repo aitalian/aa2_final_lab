@@ -13,3 +13,4 @@ postgres_12_bin_path: /usr/bin
 postgres_service: postgresql.service
 postgres_port: 5432
 postgres_user: postgres
+postgres_install_state: present
