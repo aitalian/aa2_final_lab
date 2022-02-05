@@ -19,6 +19,9 @@
 - name: Test connectivity
   hosts: load_balancers,backend_servers,database_servers
   gather_facts: false
+  pre_tasks:
+    - name: "Wait 5min for OpenStack deployment instances to be ready for connections"
+      wait_for_connection:
   tasks:
     - name: test ping
       ping:
