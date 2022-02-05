@@ -1,7 +1,5 @@
 ---
-# Only use in-memory inventory when not running in Tower
 - import_playbook: in-memory-inventory.yml
-  when: awx_job_id is not defined
 
 - name: "Deploy, configure, and populate PostgreSQL 12"
   hosts: database_servers

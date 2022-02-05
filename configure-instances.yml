@@ -1,5 +1,7 @@
 ---
 # Playbook to configure provisioned openstack instances
+- import_playbook: in-memory-inventory.yml
+
 - name: "Configure OpenStack instances using In-Memory Inventory"
   hosts: app_servers:database_servers:load_balancers
   become: yes
