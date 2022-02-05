@@ -14,8 +14,3 @@
     - name: "Create OpenStack instances"
       include_role:
         name: openstack_instances
-
-    - name: "Create templated hosts file"
-      template:
-        src: hosts.j2
-        dest: hosts
