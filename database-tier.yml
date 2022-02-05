@@ -21,3 +21,9 @@
         owner: flask
   roles:
     - postgresql_install
+    - role: firewall
+      vars:
+        firewall_services:
+          - postgresql
+        firewall_tcp_ports:
+          - 5432

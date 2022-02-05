@@ -9,3 +9,7 @@
     - load_balancers
   roles:
     - haproxy
+    - role: firewall
+      vars:
+        firewall_services:
+          - http

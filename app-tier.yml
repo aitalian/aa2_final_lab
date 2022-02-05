@@ -10,3 +10,7 @@
     - flask
   roles:
     - flask
+    - role: firewall
+      vars:
+        firewall_tcp_ports:
+          - 8080
