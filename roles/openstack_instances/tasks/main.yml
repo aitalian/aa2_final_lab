@@ -2,7 +2,7 @@
 # tasks file for openstack_instances
 - name: "Create/Destroy OpenStack instances"
   openstack.cloud.server:
-    cloud: "{{ __instance.cloud | default(default_cloud) }}"
+    #cloud: "{{ __instance.cloud | default(default_cloud) }}"
     name: "{{ __instance.name | mandatory }}"
     image: "{{ __instance.image | default(default_image) }}"
     key_name: "{{ __instance.keypair | default(default_keypair) }}"

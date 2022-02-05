@@ -1,12 +1,12 @@
 ---
 # tasks file for configure_satellite
-- name: "Get Network Details"
-  setup:
-    gather_subset:
-      - 'network'
-  connection: local
+- name: "Fetch control node info"
   delegate_to: localhost
-  delegate_facts: true
+  connection: local
+  become: false
+  os_server_info:
+    server: control
+  register: control_node_info
 
 - name: "Update DNS IP to control host"
   lineinfile:
@@ -15,7 +15,7 @@
     line: "{{ __ifcfg_line }}"
   loop:
     - PEERDNS=no
-    - DNS1={{ hostvars.localhost.ansible_default_ipv4.address }}
+    - DNS1={{ control_node_info.openstack_servers[0].private_v4 }}
   loop_control:
     loop_var: __ifcfg_line
   register: network_update
