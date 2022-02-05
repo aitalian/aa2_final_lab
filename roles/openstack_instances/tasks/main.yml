@@ -1,6 +1,6 @@
 ---
 # tasks file for openstack_instances
-- name: Create OpenStack instances
+- name: "Create/Destroy OpenStack instances"
   openstack.cloud.server:
     cloud: "{{ __instance.cloud | default(default_cloud) }}"
     name: "{{ __instance.name | mandatory }}"
