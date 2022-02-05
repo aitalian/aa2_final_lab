@@ -1,0 +1,12 @@
+---
+# FIXME: Remove this when it's time to go to Tower
+- import_playbook: in-memory-inventory.yml
+
+- name: "Deploy HAProxy load balancer"
+  hosts: load_balancers
+  gather_facts: false
+  become: true
+  tags:
+    - load_balancers
+  roles:
+    - haproxy
