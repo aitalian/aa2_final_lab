@@ -30,9 +30,12 @@
     - debug:
         var: groups
 
-- name: "Verify OpenStack deployment Instances"
+- name: "Verify OpenStack deployment instances"
   hosts: all
   tasks:
+    - name: "Wait 5min for OpenStack deployment instances to be ready for connections"
+      wait_for_connection:
+
     - name: "Verify connectivity"
       ping:
       register: output

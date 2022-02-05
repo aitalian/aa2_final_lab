@@ -26,6 +26,13 @@
     state: restarted
   when: network_update.changed | bool
 
+- name: "Wait for Satellite to be accessible"
+  ansible.builtin.wait_for:
+    host: "{{ satellite.url | default(default_satellite.url) }}"
+    port: 80
+    delay: 10
+    timeout: 60
+
 - name: "Install Katello CA Cert"
   yum:
     name: "{{ satellite.katello_ca_cert_url | default(default_satellite.katello_ca_cert_url) }}"

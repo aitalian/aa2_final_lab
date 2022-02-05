@@ -6,6 +6,9 @@
   gather_facts: false
   vars_files:
     - vars/common.yml
+  pre_tasks:
+    - name: "Wait 5min for OpenStack deployment instances to be ready for connections"
+      wait_for_connection:
   tasks:
     - name: "Configure DNS and Satellite"
       include_role:
