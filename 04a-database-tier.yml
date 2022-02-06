@@ -28,6 +28,7 @@
         postgres_install_state: "{{ instance_state }}"
     - role: firewall
       vars:
+        firewall_state: "{{ instance_state }}"
         firewall_services:
           - postgresql
         firewall_tcp_ports:
