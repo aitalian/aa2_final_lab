@@ -1,0 +1,35 @@
+---
+- import_playbook: in-memory-inventory.yml
+
+- name: "Deploy, configure, and populate PostgreSQL 12"
+  hosts: database_servers
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/common.yml
+  tags:
+    - database_servers
+  vars:
+    instance_state: present
+    postgres_users:
+      - name: flask
+        password: redhat
+        database: flask_db
+        state: "{{ instance_state }}"
+        priv: ALL
+    postgres_databases:
+      - name: flask_db
+        owner: flask
+      - name: books_store
+        owner: flask
+  roles:
+    - role: postgresql_install
+      vars:
+        postgres_install_state: "{{ instance_state }}"
+    - role: firewall
+      vars:
+        firewall_state: "{{ instance_state }}"
+        firewall_services:
+          - postgresql
+        firewall_tcp_ports:
+          - "{{ postgres_port | default('5432') }}"

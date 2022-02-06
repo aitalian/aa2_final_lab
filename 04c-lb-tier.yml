@@ -1,0 +1,22 @@
+---
+- import_playbook: in-memory-inventory.yml
+
+- name: "Deploy HAProxy load balancer"
+  hosts: load_balancers
+  gather_facts: false
+  vars_files:
+    - vars/common.yml
+  vars:
+    instance_state: present
+  become: true
+  tags:
+    - load_balancers
+  roles:
+    - role: haproxy
+      vars:
+        haproxy_install_state: "{{ instance_state }}"
+    - role: firewall
+      vars:
+        firewall_state: "{{ instance_state }}"
+        firewall_services:
+          - http

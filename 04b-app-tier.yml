@@ -1,0 +1,23 @@
+---
+- import_playbook: in-memory-inventory.yml
+
+- name: "Deploy, configure, and populate flask repo and virtualenv"
+  hosts: app_servers
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/common.yml
+  tags:
+    - application_servers
+    - flask
+  vars:
+    instance_state: present
+  roles:
+    - role: flask
+      vars:
+        flask_install_state: "{{ instance_state }}"
+    - role: firewall
+      vars:
+        firewall_state: "{{ instance_state }}"
+        firewall_tcp_ports:
+          - "{{ flask_app_port | default('8080') }}"

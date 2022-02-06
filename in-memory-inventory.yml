@@ -1,0 +1,23 @@
+---
+- name: "Building inventory"
+  hosts: control_node
+  become: false
+  vars_files:
+    - vars/common.yml
+  tasks:
+    - name: "Populate In-Memory Inventory groupings"
+      block:
+        - name: "Fetch OpenStack Instance Info"
+          os_server_info:
+          register: instances
+
+        - name: "Build In-Memory inventory"
+          ansible.builtin.add_host:
+            host: "{{ __instance.name }}.{{ internal_domain }}"
+            group: "{{ __instance.metadata.AnsibleGroup }}"
+            ansible_host: "{{ __instance.private_v4 }}"
+            ssh_private_key_file: "{{ home }}/.ssh/{{ guid }}key.pem"
+          when: __instance.metadata.deployment_name is defined and __instance.metadata.deployment_name == deployment_name
+          loop: "{{ instances.openstack_servers }}"
+          loop_control:
+            loop_var: __instance
