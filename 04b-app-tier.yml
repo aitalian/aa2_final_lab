@@ -5,12 +5,19 @@
   hosts: app_servers
   become: true
   gather_facts: false
+  vars_files:
+    - vars/common.yml
   tags:
     - application_servers
     - flask
+  vars:
+    instance_state: present
   roles:
-    - flask
+    - role: flask
+      vars:
+        flask_install_state: "{{ instance_state }}"
     - role: firewall
       vars:
+        firewall_state: "{{ instance_state }}"
         firewall_tcp_ports:
-          - 8080
+          - "{{ flask_app_port | default('8080') }}"
