@@ -32,7 +32,7 @@
   pip:
     name: "{{ pip_dependencies }}"
     state: "{{ flask_install_state }}"
-    executable: /usr/bin/pip
+    executable: /usr/bin/pip3
       #      ignore_errors: yes
 
 - name: Remove flask user
